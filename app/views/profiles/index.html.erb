@@ -1,0 +1,43 @@
+<%= render  partial: "info" %>
+<div class="">	
+	<div class="profile-section ">
+		<div class="profile_prods">
+			<div class="bg-dark p-3 profile-title">
+				<h1 >Products</h1>
+				<span><%= link_to 'New Product', new_user_product_path, class:"active mr-1"%><i class="fa fa-plus"></i></span>
+			</div>
+			<ul class="list-group ">
+			<% @products.each do |product| %>
+				<li class="list-group-item d-flex justify-content-between"
+					onclick="location.href='<%= product_path(product.id)%>';">
+					<p><%= product.name %></p>
+					<span class="badge badge-primary badge-pill">Reviews: <%= product.comments.count%></span>
+				</li>
+			<% end %>
+		</div>
+		<div class="profile_orders">
+			<div class="bg-dark p-3 profile-title">
+				<h1>Order</h1>
+				<%= link_to 'Orders', class:"active"%>
+			</div>
+			<ul class="list-group ">
+			
+		</div>
+		<div class="profile_coupons">
+			<div class="bg-dark p-3 profile-title">
+				<h1>Coupons</h1>
+				<span><%= link_to 'Coupons', coupons_path, class:"active mr-1" %><i class="fa fa-plus"></i></span>
+			</div>
+
+			<ul class="list-group ">
+			<% @coupons.each do |coupon| %>
+				<li class="list-group-item d-flex justify-content-between" 
+					onclick="location.href='<%= coupons_path%>';">
+					<p style="width:50%;"><%= coupon.name %></p>
+					<span class="badge badge-primary badge-pill">Percentage: <%= coupon.percentage * 100 %></span>
+					<span class="badge badge-primary badge-pill">Quantity: <%= coupon.quantity %></span>
+				</li>
+			<% end %>
+		</div>
+	</div>
+</div>

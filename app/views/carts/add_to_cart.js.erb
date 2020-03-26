@@ -1,0 +1,6 @@
+$("#item_count_<%= @product.id %>").html(<%= @value.to_s %>)
+$("#gross_total").html(<%= @gross_total.to_s %>)
+<% if user_signed_in? %>
+  $("#net_total").html(<%= @net_total.to_s %>)
+<% end %>
+$("#message").html("<%= j render 'message_add', message: @message %>");

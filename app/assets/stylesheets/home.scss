@@ -1,0 +1,33 @@
+// body{
+//   background-image: url("wood.jpg");
+// }
+
+.alert {
+	margin-bottom: 0!important;
+}
+
+.margin-auto {
+  margin: auto;
+}
+
+.landing {
+  width: 80%;
+  height: 80vh;
+  margin: 3vh auto;
+  // color: grey;
+  display: flex;
+  justify-content: flex-end;
+  background-image: url("shadow.png");
+  background-size: cover;
+}
+
+.text{
+  width: 35%;
+  opacity: 50%;
+  overflow-wrap: break-word;
+}
+
+.text:hover{
+  opacity: 100%;
+  
+}

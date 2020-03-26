@@ -1,0 +1,50 @@
+// Place all the styles related to the carts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+.cart_title{
+  display: flex;
+  justify-content: space-between;
+  // background-color: #b1511e;;
+  align-items: center;
+  margin: auto;
+  width: 80%;
+  color: lightgrey;
+  
+}
+
+.cart_container{
+  width: 90%;
+  margin: auto;
+}
+
+.cart_item{
+  display: flex;
+  justify-content: space-between;
+  // background-color: steelblue;
+}
+
+.images_container{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  float: left;
+  width: 75%;
+}
+
+.description_container{
+  width: 20%;
+  margin: auto 0;
+  padding: 3px;
+}
+
+.remove_display{
+  display: none !important;
+  width: 3rem; 
+  height: 3rem;
+}
+
+.pre_Check{
+  display: flex;
+}

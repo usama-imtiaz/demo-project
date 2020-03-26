@@ -1,0 +1,4 @@
+stripe:
+  development:
+    publishable_key: "pk_test_UJMrcHpCIhPJtZjO0hszUted00yVkEkn6C"
+    secret_key: "sk_test_tEeZFuXXqapipS0kioarHslV00jGhoEGUJ"

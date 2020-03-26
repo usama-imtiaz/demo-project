@@ -1,0 +1,8 @@
+<div id="comment-<%= comment.id %>" class="mb-2">
+  <strong><%= comment.user.name %></strong> :  
+  <span style="word-wrap: break-word;"><%= comment.comment %></span>
+  <% if current_user && current_user == comment.user  %>
+    <%= link_to "-- delete", product_comment_path(@product, comment), method: :delete, remote: true %>
+    <%= link_to "-- edit", edit_product_comment_path(@product, comment), remote: true %>
+    <% end  %>
+</div>

@@ -1,0 +1,60 @@
+// Place all the styles related to the profiles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.center{
+  text-align: center;
+  align-items: center;
+  margin: auto;
+}
+
+.info{
+  width: 30% !important;
+  padding: 2%;
+}
+
+p { margin: 0 !important; padding: 0 !important; }
+
+.round{
+  border-radius: 50%;
+  width: 12rem;
+  height: 12rem;
+}
+
+.borderd{
+  border: 2px blue solid !important;
+  padding: 1.5px;
+}
+
+.list-group{
+  width: 30vw;
+}
+
+.profile-section{
+  display: flex;
+  justify-content: space-between;
+  width: 92%;
+  margin: auto;
+}
+
+.profile_search{
+  background-color: #343A40;
+  align-content: center;
+  margin: auto;
+  width: 92%;
+}
+
+.profile-title{
+  color: grey;
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile-title a {
+  color: lightgray;
+  align-self: center;
+}
+
+.profile-title  a:hover {
+  color: white;
+}

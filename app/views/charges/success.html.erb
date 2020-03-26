@@ -1,0 +1,10 @@
+<div class="center">
+  <%= image_tag ("smiley.png") %>
+<div>
+<div class="jumbotron center">
+  <h2>Thank You :)</h2>
+  <p>Your order is on its way</p><br>
+
+  <%= link_to "Profile", user_profiles_path(current_user.id), class: "btn btn-primary"  %>
+  <%= link_to "Products", products_path, class: "btn btn-primary"  %>
+</div>

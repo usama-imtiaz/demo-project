@@ -1,0 +1,5 @@
+<div id="coupons">
+<% @coupon.each do |coupon| %>
+  <%= link_to coupon, apply_coupon_coupons_path, remote: true, class:"btn btn-sm btn-info mr-2 coup", id:coupon %>
+<% end %>
+</div>

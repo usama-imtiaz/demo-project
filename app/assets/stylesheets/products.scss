@@ -1,0 +1,62 @@
+
+// Place all the styles related to the Products controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.margin-auto {
+  margin: auto;
+}
+
+.prod_title {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  width: 70%;
+  margin: auto;
+  color: lightgray;  
+}
+
+.prod_title a {
+  color: lightgray;
+}
+
+.prod_title a:hover {
+  color: white;
+}
+
+.right {
+  float: right;
+}
+
+.profile_prods {
+  margin-bottom: 5vh;
+}
+
+.list-group-item {
+  cursor: pointer;
+  margin: 2px;
+}
+
+.prod_section{
+  display: flex;
+  justify-content: space-around;
+  margin: 10vh auto;
+}
+
+.image-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 70%;
+}
+
+.prod_info{
+  width: 30%;
+  margin: auto 0;
+  padding: 3px;
+}
+
+.images {
+  display: flex;
+  flex-wrap: wrap;
+}

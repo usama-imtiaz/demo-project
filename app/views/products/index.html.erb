@@ -1,0 +1,33 @@
+<%= render partial: 'search_form'%>
+
+<div class="prod_title bg-dark">
+	<h1>Products</h1>
+	<br>
+	<% if user_signed_in? %>
+		<span style="align-self:center;"><%= link_to 'New Product', new_user_product_path(current_user.id) %> <i class="fa fa-plus"></i></span>
+	<% end %>
+</div>
+
+<div class="container prods">
+	<% @products.each do |product| %>
+	<div class="card-deck flex-item">
+			<div class="card">
+				<div class="card-body" onclick="location.href='<%= product_path(product.id)%>';">
+					<h5 class="card-title"><%= product.name %></h5>
+					<p class="card-text"><%= product.description.truncate(50) %></p>
+				</div>
+				
+				<div class="card-footer">
+					<small class="text-muted">
+						<p>Category: <%= product.category %> </p>
+						<p>Unit Price: <%= product.unit_price %></p>
+						<p>Reviews: <%= pluralize(product.comments.count, "") %> </p>
+						<p>Seller: <%= product.user.name %></p>
+						<%= image_tag (product.user.image), class: 'small_profile right' %>
+					</small>
+				</div>
+				<%= render partial: 'add_to_cart_prod', locals:{product: product} %>
+			</div>
+	</div>
+	<% end %>
+</div>

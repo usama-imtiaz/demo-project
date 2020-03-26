@@ -1,0 +1,64 @@
+<div class="cart_title bg-dark mt-5 p-3"z>
+  <h2><i class="fas fa-shopping-cart"></i> Cart</h2>
+  <div>
+    <div class="mt-3">
+      <div class="">
+        <strong>Gross total:</strong>
+        <% if user_signed_in? && current_user.cart.present? %>
+          <span id="gross_total"> <%= current_user.cart.gross_total %></span>
+        <% else %>
+          <span id="gross_total"> <%= @gross_total %></span>
+        <% end %>
+        <br>
+        <strong>Net total:</strong>
+        <% if user_signed_in? && current_user.cart.present? %>
+          <span id="net_total"> <%= current_user.cart.net_total %></span>
+        <% else %>
+          <span id="net_total"> <%= @net_total%></span>
+        <% end %>
+        
+        <% if user_signed_in? && current_user.cart.present?  && !current_user.cart.bucket.empty? && current_user.cart.coupon_applied? %>
+          <br>
+          <span id="discount"><strong>Discount:</strong>  <%= current_user.cart.discount * 100 %>% </span>
+        <% end %>
+      </div>
+      <% if user_signed_in? %> 
+        <div class="pre_Check">
+          <% if current_user.cart.present? && !current_user.cart.bucket.empty? %>
+              <%= render partial: "coupon_link" %>
+              <br>
+              <%= button_to "Checkout", charges_path(current_user.id), method: :post, params: {cart: current_user.cart}, remote: true, class: "btn btn-sm btn-success", id:"checkout" %>
+          <% else %>
+              <%= button_to "Checkout", charges_path(current_user.id), method: :post, params: {cart: current_user.cart}, remote: true, class: "btn btn-sm btn-success", id:"checkout", disabled: true %>
+          <% end %>
+          <span class="spinner-grow remove_display", id="spinner" role="status"></span>
+        </div>
+      <% else %>
+        <br>
+        <div class="sign-in-warning badge badge-warning p-2 blink_me">This is a temporary cart. <%= link_to 'Log In', new_user_session_path %> to add to cart and shop.</div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="cart_container">
+  <% @cart_prods.each do |product| %>
+      <div class="cart_item mt-2 p-2" id="item_<%=product.id%>">
+        <div class="images_container border-bottom ">
+          <% product.images.each do |i| %>
+            <%= image_tag (i.variant(resize: "150x150").processed) %>
+          <% end %>
+        </div>
+        <div class="description_container ">
+          <%= product.name.truncate(20) %> <br>
+          Category: <%= product.category %> <br>
+          Unit Price: <%= product.unit_price %> <br>
+          Serial: <%= product.serial_number %> <br>
+          Quantity: <span id="item_count_<%=product.id%>"><%= @cart_items[product.id.to_s] %></span>
+          <%= render partial: "add_to_cart", locals: {product: product} %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

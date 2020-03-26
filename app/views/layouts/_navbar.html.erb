@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand shadow bg-dark fixed-top">
+   <div class="container">
+    <h2><%= link_to 'Sales', root_path, class: "navbar-brand"%></h2>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse flex navset" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <%= link_to 'Home', root_path, class: "nav-item nav-link active" %>
+        <%= link_to 'Products', products_path, class: "nav-item nav-link active" %>     
+
+      </div>
+      <div class="navbar navbar-nav navbar-right">
+        <%= link_to "Cart", carts_path, class: "nav-item nav-link active" %>        
+        <% if !current_user %>
+          <%= link_to 'Log In', new_user_session_path, class: "nav-item nav-link active" %>    
+          <%= link_to 'Sign Up', new_user_registration_path, class: "nav-item nav-link active" %>
+        <% else %>
+          <%= link_to 'Log out', destroy_user_session_path, method: :delete, 
+            class: "nav-item nav-link" %>
+            <%= link_to current_user.name, user_profiles_path(current_user.id), class: "nav-item nav-link active" %>
+            <%= image_tag (current_user.image), class: 'small_profile' %>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</nav>

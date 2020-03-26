@@ -1,0 +1,7 @@
+<div class="center_form p-4">
+  <%= form_tag(user_profiles_path, role: "search", method: :get) do |f| %>
+    <div class="form-group">
+      <%= text_field_tag :myprod, params[:myprod], class: "form-control", placeholder: "Search your products ... " %>
+    </div>
+  <% end %>
+</div>

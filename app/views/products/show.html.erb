@@ -1,0 +1,51 @@
+<div class="container">
+
+  <div class="prod_section">
+    <div class="image-container">
+      <% (0...@product.images.count).each do |image| %>
+        <div class="image-item">
+        <%= image_tag(@product.thumbnail(image)) %>
+        </div>
+      <% end %>
+    </div>
+    <span class="border-right"></span>
+    <div class="prod_info">
+      <div class="container mt-4">
+        <h3><%= @product.name %></h3> 
+        <strong>Category:</strong>  <%= @product.category %>  <br>
+        <strong>Serial No:</strong>  <%= @product.serial_number %>  <br>
+        <strong>Unit Price:</strong> <%= @product.unit_price %>  <br>
+        <strong>In Stock:</strong> <%= @product.in_stock %>  <br>
+        <strong>Description:</strong> <%= @product.description %>  <br>
+        <div><h4 class="mt-5">Seller: <strong><%= @product.user.name %></strong></h4></div> 
+      </div>
+
+      <div class="prod_links">
+        <% if @product.user == current_user %>
+          <div class="ml-3">
+            <%= render partial: 'links'%>
+          </div> 
+        <% else %>
+          <%= render partial: 'add_to_cart_prod', locals: {product: @product} %> <br><br>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="comment_form">
+    <% if user_signed_in? && @product.user != current_user %>
+      <h3>Comment</h3>
+      <%= render partial: "comments/form" %>
+    <% end %>
+  </div>
+
+  <hr>
+
+  <h3>Comments</h3>
+  <div id="comments_section">
+      <% @comments.each do |comment| %>
+        <%= render "comments/comment", comment: comment %>
+      <% end %>
+  </div>
+</div>

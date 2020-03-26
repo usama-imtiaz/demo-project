@@ -1,0 +1,25 @@
+// Place all the styles related to the coupons controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.ce{
+  margin: auto;
+}
+
+.coupon_title{
+  color: lightgrey;
+}
+
+.coupons{
+  display: flex;
+  justify-content: space-around;
+}
+
+.right{
+  width: 20%;
+  align-self: center; 
+}
+
+.form_coupon{
+  color: lightgrey;
+}

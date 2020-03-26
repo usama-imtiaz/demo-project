@@ -1,0 +1,15 @@
+<div class="coupons m-5">
+  <div class="left shadow">
+    <h1 class="bg-dark p-3 coupon_title">Coupons</h1>
+    <ul class="list-group ">
+    <% @coupons.each do |coupon| %>
+				<li class="list-group-item d-flex justify-content-between mb-2">
+					<p style="width:50%;"><%= coupon.name %></p>
+					<span class="badge badge-primary badge-pill">Percentage: <%= coupon.percentage.to_f*100 %></span>
+					<span class="badge badge-primary badge-pill">Quantity: <%= coupon.quantity.to_i %></span>
+				</li>
+			<% end %>
+  </div>
+
+  <%= render partial: "form" %>
+</div>

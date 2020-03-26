@@ -1,0 +1,14 @@
+<% if @value == 0 %>
+  $("#item_<%= @product.id %>").html("")
+  $("#gross_total").html(<%= @gross_total.to_s %>)
+  <% if user_signed_in? %>
+    $("#net_total").html(<%= @net_total.to_s %>)
+  <% end %>
+<% else %>
+  $("#item_count_<%= @product.id %>").html(<%= @value.to_s %>)
+  $("#gross_total").html(<%= @gross_total.to_s %>)
+  <% if user_signed_in? %>
+    $("#net_total").html(<%= @net_total.to_s %>)
+  <% end %>
+<% end %>
+$("#message").html("<%= j render 'message_rem', message: @message %>");
