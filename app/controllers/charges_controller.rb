@@ -4,16 +4,12 @@ class ChargesController < ApplicationController
 
   DEFAULT_CURRENCY = 'usd'.freeze
 
-  def new
-  end
-
   def create
-    return redirect_to carts_path, alert: "Not Permitted :)" if @cart.nil? || @cart.bucket.empty?
-
-    @cartItems = @cart.bucket
-    @cartProds = Product.where(id: @cartItems.keys.map{ |key| key.to_i }) if @cartItems
+    return redirect_to cart_path, alert: "Not Permitted :)" if @cart.nil? || @cart.bucket.empty?
+    @cart_items = @cart.bucket
+    @cart_prods = Product.where(id: @cart_items.keys.map{ |key| key.to_i }) if @cart_items
     @line_items = []
-    @cartProds.each do |prod|
+    @cart_prods.each do |prod|
       prod_object = {
         name: prod.name,
         description: prod.description,
@@ -28,7 +24,7 @@ class ChargesController < ApplicationController
       payment_method_types: ['card'],
       line_items: @line_items,
       success_url: charges_success_url + '?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: carts_url
+      cancel_url: charges_cancel_url
     )
   end
 
@@ -37,13 +33,10 @@ class ChargesController < ApplicationController
 
     @prods = Product.where(id: current_user.cart.bucket.keys.map{ |key| key.to_i})
     @prods.each do |prod|
-      prod.in_stock -= current_user.cart.bucket[prod.id.to_s]
+      prod.stock -= current_user.cart.bucket[prod.id.to_s]
       prod.save
     end
-
-    @coup = Coupon.find(session[:coupon_id])
-    @coup.quantity -= 1
-    @coup.save
+    set_coupon
     current_user.cart.delete
 
     @session = Stripe::Checkout::Session.retrieve(params[:session_id])
@@ -57,4 +50,11 @@ class ChargesController < ApplicationController
     def set_cart
       @cart = Cart.find(params[:cart])
     end
+
+    def set_coupon
+      @coup = Coupon.find_by(id: session[:coupon_id])
+      @coup.quantity -= 1
+      @coup.save
+    end
+
 end

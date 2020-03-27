@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   validates :name, :email, :bio, :address, :tax_id, presence: true
   validates :name,    length: { maximum: 50  }
+  validates :phone,   length: { maximum: 14  }, numericality: { only_integer: true }
   validates :bio,     length: { maximum: 200 }
   validates :address, length: { maximum: 200 }
   validates :tax_id,  length: { maximum: 30  }

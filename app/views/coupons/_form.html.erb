@@ -1,5 +1,5 @@
 <div class="right border p-4 bg-dark form_coupon">
-  <%= form_with model: @coup, name:"coupon-form", local: true do |f| %>
+  <%= form_with model: @coupon, name:"coupon-form", local: true do |f| %>
     <div class="form-group col-sm-12">
         <%= f.label :name, class: "control-label" %>
         <%= f.text_field :name, class: "form-control", id: "text-check"%>
@@ -12,7 +12,6 @@
         <%= f.label :quantity, class: "control-label" %>
         <%= f.text_field :quantity, class: "form-control", id: "text-check"%>
     </div>
-    <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.submit "Submit", class: 'submit btn btn-primary mr-3', style:"float:right" %>
   <% end %>
 </div>

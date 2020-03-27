@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_25_095826) do
+ActiveRecord::Schema.define(version: 2020_03_27_092001) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,47 +37,47 @@ ActiveRecord::Schema.define(version: 2020_03_25_095826) do
   end
 
   create_table "carts", force: :cascade do |t|
+    t.float "gross_total", null: false
+    t.float "net_total", null: false
+    t.float "discount", null: false
+    t.jsonb "bucket", null: false
+    t.boolean "coupon_applied"
     t.bigint "user_id", null: false
-    t.jsonb "bucket"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.float "gross_total"
-    t.float "net_total"
-    t.boolean "coupon_applied"
-    t.float "discount"
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
     t.text "comment"
+    t.bigint "product_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "product_id", null: false
     t.index ["product_id"], name: "index_comments_on_product_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "coupons", force: :cascade do |t|
-    t.string "name"
-    t.float "percentage"
-    t.integer "quantity"
+    t.string "name", null: false
+    t.float "percentage", null: false
+    t.integer "quantity", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_coupons_on_user_id"
   end
 
   create_table "products", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "category", null: false
+    t.string "serial_number"
+    t.integer "stock", null: false
+    t.integer "unit_price", null: false
+    t.text "description"
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "name", length: {maximum:100}
-    t.string "category", length: {maximum:50}
-    t.string "serial_number"
-    t.integer "in_stock" 
-    t.integer "unit_price"
-    t.bigint "user_id", null: false
-    t.text "description"
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
@@ -89,11 +89,11 @@ ActiveRecord::Schema.define(version: 2020_03_25_095826) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "name"
-    t.string "phone"
-    t.string "tax_id"
-    t.string "address"
-    t.text "bio"
+    t.string "name", null: false
+    t.string "phone", null: false
+    t.string "tax_id", null: false
+    t.string "address", null: false
+    t.text "bio", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -7,10 +7,10 @@ class Product < ApplicationRecord
   validates :name,        length: { maximum: 100 }
   validates :category,    length: { maximum: 50  }
   validates :description, length: { maximum: 250 }
-  validates :in_stock, :unit_price, numericality: { only_integer: true }
-  validates :name, :category, :unit_price, :in_stock, presence: true
+  validates :stock, :unit_price, numericality: { only_integer: true }
+  validates :name, :category, :unit_price, :stock, presence: true
 
-  before_save :add_serial_number
+  after_create :add_serial_number
   after_save :update_index
 
   def thumbnail index
@@ -33,12 +33,13 @@ class Product < ApplicationRecord
     end
   end
 
-  def add_serial_number 
+  def add_serial_number
     self.serial_number = self.category.first(3) + '-' + Random.rand(1000).to_s + '-' + self.id.to_s
+    self.save
   end
 
   def update_index
-    system("rake ts:sql:index")
+    system("rails ts:sql:index")
   end
 
   # scope :searchh, ->(term) { where("LOWER(name) LIKE ?", "%#{term.downcase}%") if term.present? }

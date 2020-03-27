@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show, :autocomplete, :add_to_cart]
+  before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :check_owner, only: [:edit, :update, :destroy]
 
   def index
@@ -34,7 +34,7 @@ class ProductsController < ApplicationController
 
   def autocomplete
     @products = Product.search(params[:term])
-    render json: @products.map{ |product| {id: product.id, value: product.name}}
+    render json: @products.map{ |product| {id: product.id, value: product.name }}
   end
 
   private
@@ -51,6 +51,6 @@ class ProductsController < ApplicationController
     end
 
     def product_params
-      params.require(:product).permit(:name, :category, :unit_price, :in_stock, :description, :user_id, images: [])
+      params.require(:product).permit(:name, :category, :unit_price, :stock, :description, :user_id, images: [])
     end
 end

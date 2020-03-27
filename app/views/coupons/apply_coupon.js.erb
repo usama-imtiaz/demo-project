@@ -1,3 +1,3 @@
-$('#coupons').replaceWith("<%= j render partial: 'carts/coupon_link' %>");
+$('#coupons').replaceWith("<%= j render partial: 'cart/coupon_link' %>");
 $('#net_total').html("<%= current_user.cart.net_total %>")
 $("#message").html("<%= j render 'mess_app' %>");

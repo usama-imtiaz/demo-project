@@ -2,7 +2,7 @@ class CartUpdater < ApplicationService
 
   def add product, user
     user.cart.bucket[product.id.to_s] = user.cart.bucket[product.id.to_s].present? ? user.cart.bucket[product.id.to_s]+1 : 1
-    user.cart.gross_total += Product.find(product.id).unit_price
+    user.cart.gross_total += Product.find_by(id: product.id).unit_price
     user.cart.net_total = user.cart.coupon_applied ? user.cart.gross_total - (user.cart.gross_total * user.cart.discount) : user.cart.gross_total
     user.cart.save ? true : false
   end
@@ -37,7 +37,6 @@ class CartUpdater < ApplicationService
         user.cart.gross_total += (Product.find(item.to_i).unit_price * session[:cart][item])
       end
     end
-
     user.cart.net_total = user.cart.gross_total
     if user.cart.save
       session.delete :cart

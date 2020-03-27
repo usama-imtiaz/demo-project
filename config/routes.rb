@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  put :add_to_cart, controller: :carts, action: :add_to_cart
-  put :remove_from_cart, controller: :carts, action: :remove_from_cart
+  put :add_to_cart, controller: :cart, action: :add_to_cart
+  put :remove_from_cart, controller: :cart, action: :remove_from_cart
 
   devise_for :users, path: :users
   resources :users do
@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :comments, only: %i[edit update create destroy]
   end
 
-  resources :carts, only: %i[index create edit destroy]
+  resources :cart, only: %i[index create edit destroy]
 
   resources :coupons, only: %i[index create] do
     get :get_coupons , on: :collection
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   scope :charges do
     resources :charges, only: %i[new create show]
     get :success, to: 'charges#success', as: :charges_success
-    # get :cancel,  to: 'charges#cancel', as: :charges_cancel
+    get :cancel,  to: 'charges#cancel', as: :charges_cancel
   end
 
   root to: 'home#index'

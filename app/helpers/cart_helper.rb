@@ -1,4 +1,4 @@
-module CartsHelper
+module CartHelper
   def add_to_session_cart(session, index)
     session[:cart] ||= {}
     session[:cart][index] = session[:cart][index].present? ? session[:cart][index]+1 : 1

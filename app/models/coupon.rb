@@ -2,11 +2,11 @@ class Coupon < ApplicationRecord
   belongs_to :user
 
   validates :name, :percentage, :quantity, presence: true
-  validates :name, length: {minimum:1, maximum:30}
-  validates :quantity, numericality: {only_integer: true}
-  validates :percentage, numericality: {only_float: true}
+  validates :name, length: { minimum:1, maximum:30 }
+  validates :quantity,   numericality:   { only_integer: true }
+  validates :percentage, numericality: { only_float: true }
 
-  def apply_coupon user
+  def applying_coupon user
     if !user.cart.coupon_applied
       user.cart.discount = self.percentage
       user.cart.coupon_applied = true

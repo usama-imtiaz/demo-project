@@ -1,6 +1,6 @@
-class CartsController < ApplicationController
-  include CartsHelper
-
+class CartController < ApplicationController
+  include CartHelper
+  before_action :authenticate_user!, except: %i[index add_to_cart remove_from_cart]
   before_action :set_product, only: %i[add_to_cart remove_from_cart]
   before_action :set_user_or_temp_cart
 
@@ -18,14 +18,14 @@ class CartsController < ApplicationController
 
   def add_to_cart
     return redirect_to products_path, alert: "Cannot buy own product !" if @user == @product.user
-    return redirect_to carts_path, alert: "Product out of stock!" if @product.in_stock < 1
+    return redirect_to cart_path, alert: "Product out of stock!" if @product.stock < 1
 
     if user_signed_in?
       if @user.cart.present? ? CartUpdater.new.add(@product, @user) : create
         set_gross_net_total
         @value = @user.cart.bucket[@product.id.to_s]
       else
-        redirect_to carts_path, alert: 'Something went wrong x_x'
+        redirect_to cart_index_path, alert: 'Something went wrong x_x'
       end
     else
       add_to_session_cart(session, params[:prod_id])
@@ -40,10 +40,10 @@ class CartsController < ApplicationController
         set_gross_net_total
         @value = @user.cart.bucket[@product.id.to_s].present? ? @user.cart.bucket[@product.id.to_s] : 0
       elsif @user.cart.present?
-        redirect_to carts_path
+        redirect_to cart_path
       else
         gross_net_value_zero
-        redirect_to carts_path
+        redirect_to cart_path
       end
     else
       remove_from_session_cart(session, params[:prod_id])
@@ -56,8 +56,8 @@ class CartsController < ApplicationController
     def create
       @bucket = {}
       @bucket[@product.id.to_s] = 1
-      @cart = Cart.new(user: @user, gross_total: @product.unit_price, net_total: @product.unit_price, discount: 0, bucket: @bucket, coupon_applied: false )
-      @cart.save
+      @cart = Cart.new(user: @user, gross_total: @product.unit_price, net_total: @product.unit_price, discount: 0, bucket: @bucket, coupon_applied: false)
+      redirect_to products_path, notice: "Saved to Cart" if @cart.save
     end
 
     def set_user_or_temp_cart

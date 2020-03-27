@@ -1,7 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_product
   before_action :set_comment, only: [:edit, :update]
-  before_action :authenticate_user!
 
   def create
     @comment = @product.comments.create(comment_params.merge(user_id: current_user.id))
