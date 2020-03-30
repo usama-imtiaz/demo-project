@@ -1,7 +1,7 @@
 <div class="container info">
     <div class="span3 well">
         <div class="center">
-            <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><%= image_tag (current_user.image), class: "round borderd" %></a>
+            <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><%= image_tag (current_user.image), class: "round borderd center" %></a>
             <h3><%= current_user.name %></h3>
             <p>  <%= current_user.email %> </p>
             <em>click for more</em>
@@ -16,8 +16,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="center">
-                        <%= image_tag (current_user.image), class: "round" %>
-                        <h3 class="media-heading"><%= current_user.name %></h3>
+                        <%= image_tag (current_user.image), class: "round center" %>
+                        <h3 class="media-heading "><%= current_user.name %></h3>
                         <p>  <%= current_user.email %> </p>
                         <hr>
                         <p>  <strong>Phone:</strong> <%= current_user.phone %> </p>

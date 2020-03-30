@@ -24,7 +24,7 @@ class CartUpdater < ApplicationService
 
   def move_session_cart_to_user user, session
     return if !session[:cart].present?
-    user.build_cart(bucket: {}, gross_total: 0, net_total: 0) if user.cart.nil?
+    user.build_cart(bucket: {}, gross_total: 0, net_total: 0, discount: 0, coupon_applied: false) if user.cart.nil?
     @hold_items = session[:cart].keys.select { |key| !user.products.pluck(:id).include?(key.to_i) }
     return if @hold_items.empty?
 

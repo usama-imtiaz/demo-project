@@ -13,11 +13,16 @@
 	<div class="card-deck flex-item">
 			<div class="card">
 				<div class="card-body" onclick="location.href='<%= product_path(product.id)%>';">
-					<h5 class="card-title"><%= product.name %></h5>
-					<p class="card-text"><%= product.description.truncate(50) %></p>
+				<% (0...(product.images.count-product.images.count+1)).each do |image| %>
+						<div class="image-item">
+							<%= image_tag(product.thumbnail(image)) %>
+						</div>
+				<% end %>
+					<%# <%= render partial: 'images', product: product %> 
 				</div>
 				
 				<div class="card-footer">
+					<h6 class="card-title"><%= product.name %></h6>
 					<small class="text-muted">
 						<p>Category: <%= product.category %> </p>
 						<p>Unit Price: <%= product.unit_price %></p>

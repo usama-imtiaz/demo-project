@@ -46,8 +46,10 @@
   <% @cart_prods.each do |product| %>
       <div class="cart_item mt-2 p-2" id="item_<%=product.id%>">
         <div class="images_container border-bottom ">
-          <% product.images.each do |i| %>
-            <%= image_tag (i.variant(resize: "150x150").processed) %>
+          <% (0...product.images.count).each do |image| %>
+            <div class="image-item">
+              <%= image_tag(product.icon(image)) %>
+            </div>
           <% end %>
         </div>
         <div class="description_container ">

@@ -10,21 +10,12 @@
   height: 10vh; 
 }
 
-nav{
-  //  background-color: #b1511e; 
-  // border-bottom: grey;
-  
-  
-}
 nav a{ 
-  // color: #f6eec9; 
   color: whitesmoke;
 }
 
 nav a:hover{ 
   color: steelblue 
-  // color: slategrey
-
 }
 
 body{ 
@@ -68,14 +59,36 @@ body{
 .card{
   cursor: pointer;
   border-radius:10px;
+  object-fit: cover;
+}
+
+.card-body{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  // position: absolute;
+  opacity: 80%;
+  // margin-top: 8vh;
+}
+
+.card-body:hover{
+  opacity: 100%;
 }
 
 .card:hover{
   box-shadow: 0 0 10px rgba(33,33,33,.2);
 }
 
+img {
+  max-width: 100%;
+  display: flex;
+  width: -webkit-fill-available;
+  height: 22vh;
+}
+
+
 .nav{
-  background-color: sandybrown;
+background-color: sandybrown;
 }
 
 .fa-plus{

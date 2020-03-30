@@ -39,11 +39,11 @@ class CartController < ApplicationController
       if CartUpdater.new.remove(@product, @user)
         set_gross_net_total
         @value = @user.cart.bucket[@product.id.to_s].present? ? @user.cart.bucket[@product.id.to_s] : 0
-      elsif @user.cart.present?
-        redirect_to cart_path
+      elsif current_user.cart
+        redirect_to cart_index_path
       else
         gross_net_value_zero
-        redirect_to cart_path
+        redirect_to cart_index_path
       end
     else
       remove_from_session_cart(session, params[:prod_id])

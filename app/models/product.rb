@@ -14,12 +14,12 @@ class Product < ApplicationRecord
   after_save :update_index
 
   def thumbnail index
-    self.images[index].variant(resize: "200x200").processed
+    self.images[index].variant(resize: "300x300").processed
   end
 
-  # def thumbnail2 index
-  #   self.images[index].variant(resize: "100x100").processed
-  # end
+  def icon index
+    self.images[index].variant(resize: "220x220").processed
+  end
 
   def image_type
     if images.attached? == false
