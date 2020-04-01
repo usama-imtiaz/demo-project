@@ -31,13 +31,15 @@ class ChargesController < ApplicationController
   def success
     return redirect_to root_path if !params[:session_id].present?
 
-    @prods = Product.where(id: current_user.cart.bucket.keys.map{ |key| key.to_i})
-    @prods.each do |prod|
-      prod.stock -= current_user.cart.bucket[prod.id.to_s]
-      prod.save
+    if current_user.cart.present?
+      @prods = Product.where(id: current_user.cart.bucket.keys.map{ |key| key.to_i})
+      @prods.each do |prod|
+        prod.stock -= current_user.cart.bucket[prod.id.to_s]
+        prod.save
+      end
+      set_coupon
+      current_user.cart.delete
     end
-    set_coupon
-    current_user.cart.delete
 
     @session = Stripe::Checkout::Session.retrieve(params[:session_id])
     @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
@@ -48,7 +50,7 @@ class ChargesController < ApplicationController
 
   private
     def set_cart
-      @cart = Cart.find(params[:cart])
+      @cart = Cart.find(params[:cart]) if params[:cart]
     end
 
     def set_coupon

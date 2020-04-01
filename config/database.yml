@@ -28,7 +28,7 @@ development:
   encoding: unicode
   host: db
   username: postgres
-  # username: root
+  # username: usama
   # password: 12345678
 
   # The specified database role being used to connect to postgres.
@@ -62,9 +62,9 @@ development:
 test:
   <<: *default
   database: SalesStore_test
-  adapter: postgresql
-  encoding: unicode
-  username: root
+  # adapter: postgresql
+  # encoding: unicode
+  # username: usama
   # password: 12345678
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -89,7 +89,7 @@ production:
   <<: *default
   database: SalesStore_production
   username: SalesStore
-  adapter: postgresql
-  encoding: unicode
-  username: root
+  # adapter: postgresql
+  # encoding: unicode
+  # username: usama
   # password: 12345678
