@@ -57,7 +57,7 @@ class CartController < ApplicationController
       @bucket = {}
       @bucket[@product.id.to_s] = 1
       @cart = Cart.new(user: @user, gross_total: @product.unit_price, net_total: @product.unit_price, discount: 0, bucket: @bucket, coupon_applied: false)
-      redirect_to products_path, notice: "Saved to Cart" if @cart.save
+      @cart.save
     end
 
     def set_user_or_temp_cart
